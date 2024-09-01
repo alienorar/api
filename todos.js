@@ -1,6 +1,6 @@
 const result = document.getElementById("result")
 let current_page = 1
-let items_per_page = 5
+let items_per_page = 20
 let users = []
 const pagination = document.getElementById("pagination")
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function getUsers() {
     try {
-        const response = await fetch("https://jsonplaceholder.typicode.com/users")
+        const response = await fetch("https://jsonplaceholder.typicode.com/todos")
         users = await response.json()
         console.log(users);
 
@@ -31,14 +31,9 @@ function displayUsers() {
     let pagination_users = users.slice(start_index, end_index)
     pagination_users.forEach((el, index) => {
         let tr = document.createElement('tr')
-        tr.innerHTML = `<td>${index + 1}</td>
-         <td>${el.name}</td>
-                        <td>${el.username}</td>
-                        <td>${el.email}</td>
-                        <td>${el.address.street}</td>
-                        <td>${el.phone}</td>
-                        <td>${el.website}</td>
-                        <td>${el.company.name}</td>`
+        tr.innerHTML = `<td>${el.id}</td>
+                        <td>${el.title}</td>
+                        <td>${el.completed}</td>`
         result.appendChild(tr)
     });
     paginationUsers()
